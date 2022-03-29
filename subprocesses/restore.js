@@ -29,7 +29,7 @@ function restoreDatabase() {
 
     // create the directories 
     var fs = require('fs');
-    var dir = './static/databases/' + branch + '/';
+    var dir = '/static/databases/' + branch + '/';
 
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
