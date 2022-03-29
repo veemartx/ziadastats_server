@@ -5,7 +5,11 @@ fs = require('fs');
 
 dotenv.config();
 
-let baseDir = process.env.BASEDIR;
+// Windows 
+// let baseDir = process.env.BASEDIR;
+
+// linux
+let baseDir="~/projects/ziadastats_server";
 
 // get the arguments passed here that is the filename
 let dbArchive = process.argv[2];
@@ -16,7 +20,6 @@ let branch = process.argv[3];
 let nameWithoutBakExtension = dbArchive.split('.')[0];
 // // 
 let targetDir = baseDir + '/static/extracts/';
-
 
 // catch errors
 sql.on('error', err => {

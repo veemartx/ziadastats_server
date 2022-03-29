@@ -22,6 +22,11 @@ router.post('/restore', async (req, res) => {
         if (err) {
             console.log(err)
         } else {
+
+            let baseDir = process.env.BASEDIR;
+
+            console.log(baseDir);
+
             var filename = req.file.filename;
 
             var branch = req.body.branch;
@@ -31,7 +36,7 @@ router.post('/restore', async (req, res) => {
 
             let filenameWithoutZipExtension = filenameWithoutZipExtensionArray[0] + "." + filenameWithoutZipExtensionArray[1];
 
-            let filenameWithoutBAKExtension=filenameWithoutZipExtension.split('.')[0];
+            let filenameWithoutBAKExtension = filenameWithoutZipExtension.split('.')[0];
 
             // start decompressing the file
             const uncompressBackup = fork('./subprocesses/uncompress.js', [filename, branch]);
@@ -50,7 +55,7 @@ router.post('/restore', async (req, res) => {
 
                     // start reading the data 
                     // get inventory 
-                    const getInventory = fork('./subprocesses/get_inventory.js',[filenameWithoutBAKExtension, branch]);
+                    const getInventory = fork('./subprocesses/get_inventory.js', [filenameWithoutBAKExtension, branch]);
 
                     getInventory.on('close', (code) => {
 

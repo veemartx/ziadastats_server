@@ -1,16 +1,12 @@
 const express = require('express')
 const dotenv = require('dotenv');
 const fs = require('fs');
-const path = require('path');
 const cors = require('cors');
 const os = require("os");
-const { fork } = require("child_process");
 
 // read the .env file 
 dotenv.config();
-
 let baseDir = process.env.BASEDIR;
-
 const app = express()
 const port = 3000
 
@@ -42,17 +38,6 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
-})
-
-// start wacthing uploadts
-const watchBackupExtracts = fork('./subprocesses/watch_extracts.js');
-
-watchBackupExtracts.on('message', (message) => {
-  console.log(message);
-})
-
-watchBackupExtracts.on(`close`, (code) => {
-  console.log(`Watch file subprocesse exited with code ${code}`)
 })
 
 // set base dir in env file middleware

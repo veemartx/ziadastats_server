@@ -1,9 +1,9 @@
 node_modules
-static/backups/**
-static/extracts/**
-static/databases/**
-static/csv/**
-static/docs/**
-static/sql/**
+/static/backups/*
+/static/extracts/*
+/static/databases/*
+/static/csv/*
+/static/docs/*
+/static/sql/*
 
 .env
