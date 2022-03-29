@@ -11,7 +11,7 @@ const server = process.env.SERVER
 
 
 var config = {
-    server: 'DESKTOP-0SJRFLM\\SQLEXP',  //update me
+    server: 'localhost',  //update me
     requestTimeout: 500000,
     authentication: {
         type: 'default',

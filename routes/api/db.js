@@ -8,7 +8,7 @@ const multer = require('multer');
 
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, './static/backups');
+        callback(null, './static/backups/');
     },
     filename: function (req, file, callback) {
         callback(null, file.originalname);
@@ -22,10 +22,6 @@ router.post('/restore', async (req, res) => {
         if (err) {
             console.log(err)
         } else {
-
-            let baseDir = process.env.BASEDIR;
-
-            console.log(baseDir);
 
             var filename = req.file.filename;
 

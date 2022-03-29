@@ -5,7 +5,7 @@ fs = require('fs');
 
 dotenv.config();
 
-let baseDir = process.env.BASEDIR;
+let baseDir = '/opt/ziadastats/ziadastats_server';
 
 // get the arguments passed here that is the filename
 let dbArchive = process.argv[2];
