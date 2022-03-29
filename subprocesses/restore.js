@@ -5,68 +5,63 @@ fs = require('fs');
 
 dotenv.config();
 
-// Windows 
-// let baseDir = process.env.BASEDIR;
-
-// linux
-let baseDir="~/projects/ziadastats_server";
+let baseDir = process.env.BASEDIR;
 
 // get the arguments passed here that is the filename
 let dbArchive = process.argv[2];
 
 let branch = process.argv[3];
 
-console.log(baseDir);
-
-// // // remove the bak extension 
-// let nameWithoutBakExtension = dbArchive.split('.')[0];
-// // // 
-// let targetDir = baseDir + '/static/extracts/';
-
-// // catch errors
-// sql.on('error', err => {
-//     // ... error handler
-//     console.log(`sql error ${err}`);
-// })
+// // remove the bak extension 
+let nameWithoutBakExtension = dbArchive.split('.')[0];
+// // 
+let targetDir = baseDir + '/static/extracts/';
 
 
-// function restoreDatabase() {
-
-//     // create the directories 
-//     var fs = require('fs');
-//     var dir = './static/databases/' + branch + '/';
-
-//     if (!fs.existsSync(dir)) {
-//         fs.mkdirSync(dir, { recursive: true });
-//     }
+// catch errors
+sql.on('error', err => {
+    // ... error handler
+    console.log(`sql error ${err}`);
+})
 
 
-//     // full path
-//     let path = baseDir + "/" + dir;
+function restoreDatabase() {
 
-//     // 
-//     console.log('starting restoration');
+    // create the directories 
+    var fs = require('fs');
+    var dir = './static/databases/' + branch + '/';
 
-//     sql.connect(config)
-//         .then(() => {
-//             return sql.query(
-//                 `
-//                 USE master;
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
 
-//                 EXEC RestoreDatabase @ldbName='${nameWithoutBakExtension}',@dbname='${nameWithoutBakExtension}',
-//                 @Directory_Bak='${targetDir}',				
-//                 @Directory_Dat='${path}',
-//                 @Directory_Log ='${path}'
-//                  `
-//             )
-//         })
-//         .then((resultSet) => {
 
-//             sql.close();
+    // full path
+    let path = baseDir + "/" + dir;
 
-//             console.log(resultSet);
+    // 
+    console.log('starting restoration');
 
-//         })
-// }
+    sql.connect(config)
+        .then(() => {
+            return sql.query(
+                `
+                USE master;
 
-// restoreDatabase();
+                EXEC RestoreDatabase @ldbName='${nameWithoutBakExtension}',@dbname='${nameWithoutBakExtension}',
+                @Directory_Bak='${targetDir}',				
+                @Directory_Dat='${path}',
+                @Directory_Log ='${path}'
+                 `
+            )
+        })
+        .then((resultSet) => {
+
+            sql.close();
+
+            console.log(resultSet);
+
+        })
+}
+
+restoreDatabase();
