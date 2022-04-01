@@ -35,7 +35,9 @@ function handleBranchInventory(config) {
             ,[partwhole]
             ,[BCODE]
             ,[savetime]
-            from dbo.STOCKTRANSOUT`)
+            from dbo.STOCKTRANSOUT
+            WHERE EXPIRY_DATE>'2022-04-01'
+            `)
         })
         .then(function (recordset) {
             sql.close();
@@ -65,7 +67,10 @@ function postZiadaLiteData(branch, stock, database) {
     const body = { branch: branch, stock: stock, database: database };
 
 
-    axios.post(url, body)
+    axios.post(url, body, {
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity
+    })
         .then(function (response) {
             console.log(response.data);
         })
