@@ -68,7 +68,9 @@ router.post('/restore', async (req, res) => {
                         console.log(`Cash Sale Head Process Exited With Code ${code}`);
 
                     })
+                    
 
+                    // cash sale data
 
                     const getCashSaleData = fork('./subprocesses/get_csale_dt.js', [filenameWithoutBAKExtension, branch]);
 
@@ -77,6 +79,26 @@ router.post('/restore', async (req, res) => {
                         console.log(`Get Cash Sale Data Exited With Code ${code}`);
 
                     })
+
+                    // get stock trans in
+                    const getStockTransIn = fork('./subprocesses/get_stocktrans_in.js', [filenameWithoutBAKExtension, branch]);
+
+                    getStockTransIn.on('close', (code) => {
+
+                        console.log(`Get Stock Transfer In Exited With Code ${code}`);
+
+                    })
+
+
+                    // get stock trans out
+                    const getStockTransOut = fork('./subprocesses/get_stocktrans_out.js', [filenameWithoutBAKExtension, branch]);
+
+                    getStockTransOut.on('close', (code) => {
+
+                        console.log(`Get Stock Transfer Out Exited With Code ${code}`);
+
+                    })
+
 
 
                     // get expiries
