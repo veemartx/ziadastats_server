@@ -81,7 +81,7 @@ router.post('/restore', async (req, res) => {
                     })
 
                     // get stock trans in
-                    const getStockTransIn = fork('./subprocesses/get_stocktrans_in.js', [filenameWithoutBAKExtension, branch]);
+                    const getStockTransIn = fork('./subprocesses/get_stock_transfer_in.js', [filenameWithoutBAKExtension, branch]);
 
                     getStockTransIn.on('close', (code) => {
 
@@ -91,7 +91,7 @@ router.post('/restore', async (req, res) => {
 
 
                     // get stock trans out
-                    const getStockTransOut = fork('./subprocesses/get_stocktrans_out.js', [filenameWithoutBAKExtension, branch]);
+                    const getStockTransOut = fork('./subprocesses/get_stock_transfer_out.js', [filenameWithoutBAKExtension, branch]);
 
                     getStockTransOut.on('close', (code) => {
 
