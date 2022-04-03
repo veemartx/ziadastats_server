@@ -81,23 +81,23 @@ router.post('/restore', async (req, res) => {
                     })
 
                     // get stock trans in
-                    const getStockTransIn = fork('./subprocesses/get_stock_transfer_in.js', [filenameWithoutBAKExtension, branch]);
+                    // const getStockTransIn = fork('./subprocesses/get_stock_transfer_in.js', [filenameWithoutBAKExtension, branch]);
 
-                    getStockTransIn.on('close', (code) => {
+                    // getStockTransIn.on('close', (code) => {
 
-                        console.log(`Get Stock Transfer In Exited With Code ${code}`);
+                    //     console.log(`Get Stock Transfer In Exited With Code ${code}`);
 
-                    })
+                    // })
 
 
                     // get stock trans out
-                    const getStockTransOut = fork('./subprocesses/get_stock_transfer_out.js', [filenameWithoutBAKExtension, branch]);
+                    // const getStockTransOut = fork('./subprocesses/get_stock_transfer_out.js', [filenameWithoutBAKExtension, branch]);
 
-                    getStockTransOut.on('close', (code) => {
+                    // getStockTransOut.on('close', (code) => {
 
-                        console.log(`Get Stock Transfer Out Exited With Code ${code}`);
+                    //     console.log(`Get Stock Transfer Out Exited With Code ${code}`);
 
-                    })
+                    // })
 
 
 
